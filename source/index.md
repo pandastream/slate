@@ -7,162 +7,59 @@ language_tabs:
   - python
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='http://github.com/tripit/slate'>Documentation Powered by Slate</a>
+  - Copyright © 2011-15 PandaStream
+  - All rights reserved
 
 includes:
-  - errors
-
+ - faq
+ - client_libraries
+ - api
+ - api_base_url
+ - api_videos
+ - api_encodings
+ - s3
+ - gcs
+ - rackspace
+ - ftp
+ - create_an_iam_user_for_panda
+ - integrate_with_rails
+ - integrate_with_php
+ - uploader
+ - upload_api
+ - notifications
+ - video_players
+ - video_streaming
+ - widget
+ - presets
+ - encoding_profiles
+ - debugging_panda
+ 
 search: true
 ---
 
-# Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+# General
 
-We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+## Getting started with Panda
 
-This example API documentation page was created with [Slate](http://github.com/tripit/slate). Feel free to edit it and use it as a base for your own API's documentation.
+At the core of Panda is a REST API which supports uploading and managing of videos, encodings and output profiles.
 
-# Authentication
+Every Panda account has a number of __clouds__. Each cloud defines a single storage for your uploaded videos, resulting encodings and thumbnails.
 
-> To authorize, use this code:
+Typically you will want to create a separate cloud for each website you plan to integrate Panda into. You can also use clouds to separate production and staging environments.
 
-```ruby
-require 'kittn'
+To access the API there are client libraries available in many languages: [See all client libraries](#libraries). Refer to the [API Docs](#api) when using the API. All API responses are JSON-formatted.
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
+The following guides are also available: [Rails How-to](#rails) and [PHP How-to](#php).
 
-```python
-import kittn
+![Javascript Uploader](/images/docs/uploader_preview.png)
 
-api = kittn.authorize('meowmeowmeow')
-```
+Panda provides two ways of sending video files in for transcoding. The first is by using the url of a video anywhere on the web (see [API Docs](#api) for details). The other method is by using our excellent [Javascript uploader](#uploader) which supports seamless HTML5 and Flash uploads, automatically detected depending on the client's browser.
 
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
-```
+To configure the encoding output formats, refer to the [Encoding Presets documentation](#presets).
 
-> Make sure to replace `meowmeowmeow` with your API key.
+### Feedback
 
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
+Whether you feel that this article is incorrect, outdated or missing information, don't hesitate to contact the [support](http://support.pandastream.com).
 
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
-
-<aside class="notice">
-You must replace `meowmeowmeow` with your personal API key.
-</aside>
-
-# Kittens
-
-## Get All Kittens
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
-
-```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
-```
-
-> The above command returns JSON structured like this:
-
-```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Isis",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
-```
-
-This endpoint retrieves all kittens.
-
-### HTTP Request
-
-`GET http://example.com/kittens`
-
-### Query Parameters
-
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
-## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/3"
-  -H "Authorization: meowmeowmeow"
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "name": "Isis",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
-}
-```
-
-This endpoint retrieves a specific kitten.
-
-<aside class="warning">If you're not using an administrator API key, note that some kittens will return 403 Forbidden if they are hidden for admins only.</aside>
-
-### HTTP Request
-
-`GET http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the cat to retrieve
 
