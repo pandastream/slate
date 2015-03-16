@@ -17,6 +17,13 @@ includes:
  - api_base_url
  - api_videos
  - api_encodings
+ - api_profiles
+ - api_clouds
+ - api_notifications
+ - api_api_errors
+ - api_error_classes_and_messages
+ - api_authentication
+ - others
  - s3
  - gcs
  - rackspace
